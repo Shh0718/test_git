@@ -1,0 +1,70 @@
+"""
+单核CPU实现多任务原理：操作系统轮流让各个任务交替执行
+多核CPU实现多任务处理：真正的秉性执行多任务只能在多核CPU上实现，但是由于任务数量远远多于CPU的核心数量，所以，操作系统也会自动把很多任务轮流调度到每隔核心上执行
+
+并发：当有多个线程在操作时，如果系统只有一个CPU，则它根本不可能真正同时执行一个以上的线程，他只能把CPU运行时间划分为若干哥时间段，再将时间段分配给各个线程执行，没一个时间段的线程代码运行时，其他线程处于挂起状态，这种方式称之为并发
+并行：当系统右一个以上的CPU时，则线程的操作可能非并发。当一个CPU执行一个线程时，另一个CPU可以执行另一个线程，这两个线程互不抢占CPU资源，可以同时进行，这种方式称之为并行
+
+
+多进程
+多线程
+协程
+
+进程：系统进行资源分配和调度的最基本单位，操作系统结构的基础单位。进程是线程的容器 ，进程是程序的一个实体
+    对于操作系统来说，一个任务就是一个进程
+        优点：稳定性高，一个进程奔溃了，不会影响其他进程，进程间是独立的
+        缺点：创建进程开销大；操作系统的能同时运行的进程数有限
+      对象调用方法：
+      process.start()  启动进程并执行任务
+      process.run()  只是执行了任务但是没有启动进程
+      terminate()  终止
+
+      主进程启动两个子进程，全局变量不共享  相当于m=1 子进程1 m+=1 ，子进程2获取m还是1
+      自定义进程 继承Process类
+
+
+进程可以包含多个线程
+线程可以包含多个协程
+
+
+
+"""
+# 进程创建
+
+# import os
+# pid = os.fork()  # 向操作系统申请一个进程，分配一个进程号 ***linux 系统下可以使用fork创建进程***
+# print(pid)
+
+from multiprocessing import Process
+from time import sleep
+import os
+
+
+# 创建子进程
+def task1(s, name):
+    while True:
+        print("This is task 1.......", os.getpid(), '----------', os.getppid(), name)
+        sleep(s)
+
+
+# 创建子进程
+def task2(s):
+    while True:
+        print("This is task 2.......", os.getpid(), '----------', os.getppid())
+        sleep(s)
+
+num = 1
+if __name__ == '__main__':
+    p1 = Process(target=task1, name='任务1', args=(2, 'aa'))  # target 函数 name 是进程的名称 args 是target的传参，(给函数传递的参数)必须是可迭代的
+    p1.start()  # 对象调用的方法 启动进程并执行任务   process.run() 只是执行任务，但是没有启动进程
+    p2 = Process(target=task2, name='任务2', args=(1,))
+    p2.start()
+    print("=" * 50)
+    while True:
+        num += 1
+        sleep(0.5)
+        if num == 100:
+            p1.terminate()
+            p2.terminate()
+            break
+    print("End====")

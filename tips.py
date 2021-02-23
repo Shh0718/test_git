@@ -60,4 +60,12 @@ zip_list1 = list(zip(a,c))  # [('a', 1), ('b', 2), ('c', 3)]
 flask应用
 get请求 可以使用requests.args.get()获取请求参数 
 post请求可以使用requests.form.get()获取请求查询参数
+falsk的MVC设计思想
+1.客户端发起请求后，通过路由找到试图处理函数
+2.路由（请求资源）和视图处理函数（controller）事先在app中声明
+3.在视图的处理函数中根据业务需求，加载数据（model）并渲染到模板中（view）
+4.将渲染之后的模板数据返回给客户端
+
+flask特有的mtv设计思想
+MTV设计思想，基于MVC，M-model T- template V-view
 """

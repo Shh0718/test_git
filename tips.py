@@ -69,3 +69,22 @@ falsk的MVC设计思想
 flask特有的mtv设计思想
 MTV设计思想，基于MVC，M-model T- template V-view
 """
+import re
+
+str_exec = "18943659276 1238492284"
+
+a = re.match('[1-9]+', str_exec)
+b = re.findall('[1-9]{3}', str_exec)
+print(a.group(), b)
+
+str1 = 'if orl if ,there is no'
+a = re.sub(' if','x',str1)
+a=str1.find('or')
+print()
+print(a)
+
+aa = [1,2,3,4,5]
+sums = sum(map(lambda x:x+3,aa[1:3]))
+print(aa[1::])
+print(sums)
+

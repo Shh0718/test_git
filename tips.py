@@ -88,3 +88,17 @@ sums = sum(map(lambda x:x+3,aa[1:3]))
 print(aa[1::])
 print(sums)
 
+"""
+一、场景
+执行 pip install scrapy 后，安装成功且执行 import scrapy 成功
+
+二、问题
+在shell中执行 scrapy 返回 bash: scrapy: command not found
+
+三、解决办法
+（1）进入 Python 的主目录，如cd /usr/local/python3.6/bin，查找 scrapy 项
+（2）检查 cd /usr/bin/ | ll | grep scrapy，查看是否存在
+（3）不存在则执行 ln -s /usr/local/bin/scrapy /usr/bin/scrapy
+（4）回到shell，执行 scrapy version，成功
+"""
+

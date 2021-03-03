@@ -1,0 +1,30 @@
+flask 模板
+1.在def下有变量，可以直接通过传参的方式传入模板中，html中使用{{变量名}}来接受,如果是字典的话，直接dic["name"]
+    例子：@app.route(“/”)
+         def index():
+            a = 1
+            list1=[1,2,3]
+         return render_template("home.html",a=a,list1=list1) //前面的a是模板里面的a，后面的a是当前函数里面的a
+    hmoe.html:
+        <p>this is a :{{a}}</p>
+2.if 判断
+    html:
+    <% if a >= 1 %>
+      <a href="#">注销</a>
+    <% else %>
+      <a href="#">注册</a>
+     <% endif %>
+3.for循环
+    <% for i in list1 %>
+        <p>{{i}}</p>
+    <% endfor %>
+4.过滤器
+  a|default("123") //缺省值 如果def下面没有传a，那么直接用123
+  <h4>{{ list1|length }}</h4> //传过来的list1的长度
+5.继承和block
+   继承作用：把公共的部分放到父模板中，避免每个模板相同的代码
+   {% extends 'base.html' %}
+   block作用：可以让子模板实现一些自己的需求，父模板需要提前定义好
+   注意点：子模板中的代码，必须放到block块中
+   {% blcok head %}{% endblcok %}
+  

@@ -9,15 +9,15 @@ flask 模板
         <p>this is a :{{a}}</p>
 2.if 判断
     html:
-    <% if a >= 1 %>
+    {% if a >= 1 %}
       <a href="#">注销</a>
-    <% else %>
+    {% else %}
       <a href="#">注册</a>
-     <% endif %>
+     {% endif %}
 3.for循环
-    <% for i in list1 %>
+    {% for i in list1 %}
         <p>{{i}}</p>
-    <% endfor %>
+    {% endfor %}
 4.过滤器
   a|default("123") //缺省值 如果def下面没有传a，那么直接用123
   <h4>{{ list1|length }}</h4> //传过来的list1的长度
@@ -26,5 +26,17 @@ flask 模板
    {% extends 'base.html' %}
    block作用：可以让子模板实现一些自己的需求，父模板需要提前定义好
    注意点：子模板中的代码，必须放到block块中
-   {% blcok head %}{% endblcok %}
+   {% blcok head %}
+   {% endblcok %}
+   
+6.flask拓展 flask-bootstrap
+
+7.form表单
+        csrf 跨站请求伪造
+        
+https://www.cnblogs.com/songboriceboy/category/1867414.html
+
+
+
+
   

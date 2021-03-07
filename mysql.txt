@@ -1,0 +1,99 @@
+mysql
+数据 : 能够输入到计算机中并被识别处理的信息集合 数据结构 :研究一个数据集合中数据之间关系的 
+数据库 : 按照数据结构，存储管理数据的仓库。数据库是在数据库管理系统管理和控制下，在一 定介质上的数据集合。 
+数据库管理系统 :管理数据库的软件，用于建立和维护数据库 (图数据库系统) 数据库系统 : 由数据库和数据库管理系统，开发工具等组成的集合 
+数据库分类和常见数据库 
+关系型数据库和非关系型数据库
+关系型: 采用关系模型来组织数据结构的数据库 (二维表) 
+非关系型: 不采用关系模型组织数据结构的数据库
+1. 数据库结构 (图库结构) 
+数据元素 --> 记录 -->数据表 --> 数据库 
+2. 数据库概念解析 数据表 : 存放数据的表格 (图表结构) 字段: 每个列，用来表示该列数据的含义 记录: 每个行，表示一组完整的数据 
+3. MySQL特点 
+是开源数据库，使用C和C++编写 能够工作在众多不同的平台上 
+提供了用于C、C++、Python、Java、Perl、PHP、Ruby众多语言的API 存储结构优良，运行速度快 功能全面丰富 
+
+
+
+一 基础查询：
+使用as起别名：1⃣️便于理解2⃣️如果查询的字段有重名的情况，使用别名可以区分开来
+	select name as 姓名； 此处的as可以省略
+	select name as ‘na me’ 中间有空格的话，建议加上引号
+去重：select distinct name from database
++号：mysql中加号只有一种功能；运算  select 100+90； —》190 
+						selcet ‘123’ + 90；—》213
+						select ‘abc’ + 90； —》90
+						select null + 90； —》null
+	**将两个字段连接成一个字段  ，使用concat函数，函数里面可以套用函数
+	select concat（lastname，’～’，firstname，’～’，ifnull（money，0）） as name from database；
+二 条件查询：
+语法：select * from table where xxx
+分类：
+	1.按条件表达式筛选  > < =   不等于—》< >或者 ！=
+		select * from database where money <>100
+	2.按逻辑表达式  与&&  或|| 非!  And or not
+		select name, age from database where not(money >=100 and sex=‘f’) or money <90;
+	3.模糊查询 like ；between and；in；is null
+		like 
+		一般和通配符连用 1⃣️%任意多个字符，包含0个字符2⃣️ _ 任意一个字符
+		select * from database where name like ‘_b%a%’;   表明查询name第二个字符为b，且包含字母a的所有信息
+		特殊情况 比如搜索字段中带有_或者%，select * from database where name like ‘_/_%’ 或者  select * from database where name like ‘_a_%’escape ‘a’    #escape 指定转义字符 a
+		between and 
+		1⃣️提高简洁度2⃣️包含临界值3⃣️临界值不能替换位置
+		select * from database where money between 100 and 200；
+		in
+		1⃣️提高语句简洁度2⃣️in列表的值必须统一或者兼容where字段3⃣️不支持通配符
+		select * from database where name in（’a’,’b’,’c'）
+		is null
+		1⃣️= 或者<>无法判断null值 ，可以用is null 或者 is not null 2⃣️安全等于 <=> 既可以判断null又可以判断普通数值，不过可读性较低，不建议使用
+		select * from name where monry is null
+三 排序查询
+	1⃣️desc表示降序，asc表示升序（默认）2⃣️order by 支持单个字段，多个字段，表达式，函数，别名 3⃣️order by 放在语句的最后面，limit子句除外
+	语法：select * from database order by salary  decs 
+		按照年薪的高低显示员工的信息和年薪：
+		select *，salary*12*(1+ifnull(commision_pct,0)) as 年薪 from database order by salary*12*(1+ifnull(commision_pct,0))  DESC  相当于在原有的基础上增加了一个年薪字段
+		select *，salary*12*(1+ifnull(commision_pct,0)) as 年薪 from database order by 年薪   DESC
+		select * from database order by length（name），order by money desc
+四 常见函数
+	概念：将一组逻辑语句封装在方法中，对外暴露名称 隐藏实现细节 提高代码重用性
+	分类：单行函数：如concat 拼接 length ifnull  
+			字符函数：upper 大写，lower小写，substr 截取指定索引的字符串（从1开始） ，instr 返回子串在大字符串的第一次出现的索引，trim 去掉前后的空格 ，lpad 左填充指定长度，字符串超过长度截取 rpad，replace
+			数学函数：round 四舍五入，ceil 向上取整，返回大于等于该参数的最小整数，floor 向下取整，truncate 截断 mod取余 mod（a，b）—》 a-a/b*b
+			日期函数：now返回当前系统日期+时间  curdate返回当前日期不包含时间 curtime 返回当前时间不包含日期 year month… str_to_date将日期格式的字符串转换为指定格式的日期  date_format 将日期转换成字符串
+			其他函数 version（）， database（），user（）
+			流程控制函数 if（），
+					case（） ，select name,age result,case age when 1 then 1*8 when 2 then 2*8 end as result_age from pet;
+		分组函数：做统计使用，又称为统计函数，聚合函数，组函数
+			sum ，处理数值型，忽略null
+			avg，处理数值型，忽略null
+			max，处理任何数值，忽略null
+			min，处理任何数值，忽略null
+			count 计算个数，处理任何数值，忽略null 
+				一般用count（*） 统计行数 select count(*) from database
+			   	和分组函数一同查询的字段要求是group by 后的字段
+五 分组查询
+	语法： select 分组函数，列（要求出现在group by 的后面） from 表 【where 筛选条件】group by 分组的列表 【order by 子句】 注意：查询列表必须特殊，要求是分组函数和group by 后出现的字段
+	特点： 
+		分组查询中的筛选条件分为两类
+		类别		   数据源		      位置		             关键字
+		分组前筛选  原始表          group by子句的前面    where
+		分组后筛选  分组后的结果集   group by子句的后面    having
+	简单的分组查询 select max(money),job from database group by job
+	添加筛选条件select avg(money),job from database where email like ‘%a%’ group by job
+	添加复杂的筛选条件
+		查询哪个部门的员工数量>2
+		1⃣️查询每个部门的员工个数  
+			select count(*) as 个数,bumen from database group by database;
+		2⃣️根据上面的结果进行筛选，查选哪个部门的员工个数>2
+			select count(*) as 个数，bumen from database group by database,having count(*) >2 ;
+查询
+
+
+		
+		
+		
+
+	
+
+
+

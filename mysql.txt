@@ -122,7 +122,72 @@ select count（*），jobidfrom biao group by jobid
    右外连接
    全外连接
   交叉连接		
-		
+  
+流程控制函数
+
+　　①if(条件表达式，表达式1，表达式2)：如果条件表达式成立，返回表达式1，否则返回表达式2
+
+　　②case情况1：
+
+　　case 变量或者表达式或者字段
+
+　　when 常量1 then 值1，
+
+　　when 常量2 then 值2，
+
+　　...
+
+　　else 值n
+
+　　end
+
+　　case情况2
+
+　　case 
+
+　　when 条件1 then 值1，
+
+　　when 条件 2 then 值2，
+
+　　...
+
+　　else 值n
+
+　　end
+
+ 
+
+sq99 语法
+
+　　select 查询列表
+
+　　from 表1 别名 【连接类型】
+
+　　join 表2 别名 
+
+　　on 连接条件
+
+　　【where 筛选条件】
+
+　　【group by 分组】
+
+　　【having 筛选条件】
+
+　　【order by 排序列表】
+
+分类：
+
+内连接：inner
+
+外连接：
+
+　　左外：left 【outer】
+
+　　右外：right【outer】
+
+　　全外：full【outer】
+
+交叉连接：cross
 		
 
 	

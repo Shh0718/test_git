@@ -3,3 +3,4 @@ redis/mysql
 django/flask
 爬虫
 python发送邮件
+装饰器

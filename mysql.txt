@@ -192,7 +192,8 @@ sq99 语法
 数据库引擎？
 redis雪崩
 	
-UPDATE table_name SET field1=new-value1, field2=new-value2
+更新表操作UPDATE table_name SET field1=new-value1, field2=new-value2
 [WHERE Clause]
+正则匹配 SELECT name FROM person_tbl WHERE name REGEXP '^st';
 
 

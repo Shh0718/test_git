@@ -1,4 +1,25 @@
-你好，我叫xxx，毕业于xxx。这次我应聘的是python开发工作。我有两份工作经验，第一份工作在无锡道丰，担任python后端开发，主要负责数据库以及部分功能的实现，第二份工作在江苏润和，担任python测试开发，经历过大大小小多次迭代，出色完成任务，后期被调入开发者，参与神经网络的调试迁移。感谢能给我这次面试机会，期待能在咱们公司发挥特长，与公司共同进步，谢谢
+你好，我叫xxx，毕业于xxx。这次我应聘的是python开发工作。
+我有两份工作经验，第一份工作在无锡道丰，担任python后端开发，主要负责数据库以及部分功能的实现，
+第二份工作在江苏润和，担任python测试开发，前期主要负责回归测试，设计自动化测试用例，编写测试脚本
+后期被调入开发者专项，参与神经网络的调试迁移，并开发出gitlab gitee的相互传输框架。感谢能给我这次面试机会，期待能在咱们公司发挥特长，与公司共同进步，谢谢
+
+数据库的设计：
+用户名（主键） 昵称 邮箱 密码 个人签名 个人描述 头像
+
+注册 用户进入到注册页面，需要填写用户名，email，密码
+填写
+
+神经网络 ： 残差神经网络 卷积神经网络 resnet50 loss拟合 性能精度值
+        语义分割(semantic segmentation)  unet
+目标检测(object detection)  cnn yolov3       图像分类 alexnet  vgg  resnet
+目标识别(object recognition)
+实例分割(instance segmentation)
+
+框架 配置文件 蓝区黄区 git修改日志 gitlog 大体上是shell开发 也有部分功能用到的python脚本 比如执行失败，发邮件
+                                                    from email.mime.text import MIMEText
+                                                    from subprocess import Popen, PIPE
+                                                    import commands
+
 superset 数据库管理
 专业技能 
 知识储备

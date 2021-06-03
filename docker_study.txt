@@ -1,0 +1,24 @@
+docker 有客户端服务端，典型的cs架构
+echo "c2hoMDcxODo5NjA0MDVAbHh3" | base64 -d
+
+注册 docker login docker.io
+搜索 docker search alpine 
+拉取镜像 docker pull alpine
+拉取指定tag（版本）的镜像 docker pull alpine:3.10.3
+镜像结构： registry_name/repository_name/image_name:tag_name 例如: docker.io/library/alpine:3.10.1
+本地镜像查询 docker images
+给镜像打标签  docker tag d1165f221234 hello-world:hello
+推送镜像 docker push docker.io/shh0718/hello-world:hello
+删除镜像 docker rmi -f imageid 强制删除镜像，先将同一个镜像的不同的tag删除，再删除镜像
+
+docker ps -a 列出本地启动容器的进程
+启动容器 docker run -ti xxx /bin/bash
+进入容器 docker exec -ti xxx /bin/bash
+停止容器 docker stop/start/restart xxx
+过滤掉环境上面的已经退出的docker并把它删除 for i in `docker ps -a | grep -i exit | awk '{print $1}'`;do docker rm -f $i;done   
+
+修改镜像 保存 docker commit -p imagid xxxx:xxxtag
+
+导出镜像 docker save imgid > xxx:tagxxx.tar
+导入镜像 docker load < xxx:tagxxx.tar
+重命名镜像 docker tag imgid xxx:tagxxx

@@ -22,3 +22,17 @@ docker ps -a 列出本地启动容器的进程
 导出镜像 docker save imgid > xxx:tagxxx.tar
 导入镜像 docker load < xxx:tagxxx.tar
 重命名镜像 docker tag imgid xxx:tagxxx
+
+
+docker logs 查看日志
+
+映射端口
+docker run -p 容器外端口：容器内端口
+
+挂载数据卷
+docker run -v 容器外目录：容器内目录
+传递环境变量
+docker run -e 环境变量key：环境变量value
+容器内安装软件（工具）
+yum/apt-get/apt ...
+
